@@ -1,0 +1,8 @@
+.env
+creds*
+credentials*
+!creds*.sample 
+roles
+secrets
+cluster_setup
+.vscode 
