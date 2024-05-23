@@ -18,7 +18,18 @@ spec:
               number: 5000
         path: /
         pathType: Prefix
+  - host: result.training.sass.ro
+    http:
+      paths:
+      - backend:
+          service:
+            name: result
+            port:
+              number: 5001
+        path: /
+        pathType: Prefix
   tls:
   - hosts:
     - vote.training.sass.ro
+    - result.training.sass.ro
     secretName: vote-cert 
