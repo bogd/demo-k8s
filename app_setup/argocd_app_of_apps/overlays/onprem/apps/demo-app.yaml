@@ -13,7 +13,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/bogd/demo-k8s.git
-    path: app_setup/app/overlays/prod
+    path: app_setup/webapp/overlays/prod
     targetRevision: main
   syncPolicy:
     automated:
