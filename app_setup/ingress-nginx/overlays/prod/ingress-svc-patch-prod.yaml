@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ingress-nginx
+  name: ingress-nginx-controller
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 185.163.111.65
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  

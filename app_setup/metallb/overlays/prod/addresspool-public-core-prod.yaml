@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: public-demo
+  namespace: metallb-system
+spec:
+  addresses:
+  - 185.163.111.65-185.163.111.65
