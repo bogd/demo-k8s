@@ -12,8 +12,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: git@github.com:bogd/kube-infrastructure
-    path: apps/ingress-nginx/overlays/staging
+    repoURL: https://github.com/bogd/demo-k8s
+    path: app_setup/ingress-nginx/overlays/dr1
   syncPolicy:
     automated:
       prune: true
