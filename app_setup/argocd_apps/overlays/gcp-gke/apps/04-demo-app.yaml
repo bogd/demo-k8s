@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 04-demo-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  finalizers:  
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/bogd/demo-k8s.git
+    path: app_setup/webapp/overlays/dr1
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
