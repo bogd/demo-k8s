@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: vote
+  namespace: vote
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: vote-dr.training.sass.ro
+    http:
+      paths:
+      - backend:
+          service:
+            name: vote
+            port:
+              number: 5000
+        path: /
+        pathType: Prefix
+  - host: result-dr.training.sass.ro
+    http:
+      paths:
+      - backend:
+          service:
+            name: result
+            port:
+              number: 5001
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - vote-dr.training.sass.ro
+    - result-dr.training.sass.ro
+    secretName: vote-cert 
