@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: letsencrypt-prod 
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: argocd-demo.training.sass.ro
+    http:
+      paths:
+      - path: /api/webhook
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: http
+  tls: 
+  - hosts:
+    - argocd-demo.training.sass.ro
+    secretName: argocd-demo.training.sass.ro-http-cert
+    
+--- 
+# TLS termination on ingress, disable HTTPS on ArgoCD server
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cmd-params-cm
+  namespace: argocd
+data:
+  server.insecure: "true"
+--- 
